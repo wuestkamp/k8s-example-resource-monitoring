@@ -34,6 +34,8 @@ kubectl apply -f i/k8s
 ```
 
 
+## monitor
+
 ### Run Grafana
 ```
 ./run/grafana.sh
@@ -43,6 +45,10 @@ Then head to http://localhost:3000/login
 User: admin
 
 Password: printed in the terminal output.
+
+#### install Dashboard
+Go to http://localhost:3000/dashboard/import and import the dashboard from `i/grafana/dashboard.json`
+
 
 
 
