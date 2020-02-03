@@ -2,6 +2,11 @@
 
 Medium article: TODO
 
+**NOTICE**
+If some of the Prometheus queries are not working for you it might be because of `pod_name` or `container_name` have been renamed to `pod` and `container` in other metrics-server version.
+
+
+
 ## run yourself
 
 ### You need a cluster, like with Gcloud:
@@ -33,7 +38,7 @@ kubectl apply -f i/k8s
 ```
 ./run/grafana.sh
 ```
-Then head to http://localhost:3000/login.
+Then head to http://localhost:3000/login
 
 User: admin
 
@@ -42,12 +47,43 @@ Password: printed in the terminal output.
 
 
 ### Use resources
+Exec into the running pod and make it use resources.
+
 ```
-k exec -it compute-7bc79fcc8-jd5c4 stress -- -cpus 1
+# cpu
+kubectl exec -it compute-7bc79fcc8-jd5c4 stress -- -cpus 1
+
+# memory
+kubectl exec -it compute-b57fb48cd-km6wn bash
+> /usr/local/bin/stress --cpu 1 --io 4 --vm 1 --vm-bytes 400M
 ```
 
 
 # Prometheus queries
+
+## cpu
 ```
-sum (rate (container_cpu_usage_seconds_total{pod_name=~"compute-.*"}[5m]))
+# container usage
+sum(rate (container_cpu_usage_seconds_total{pod_name=~"compute-.*", image!="", container!="POD"}[5m]))
+
+# container requests
+avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
+
+# container limits
+avg(kube_pod_container_resource_limits_cpu_cores{pod=~"compute-.*"})
+
+# throttling
+sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!="POD", image!=""}[5m]))
+```
+
+## memory
+```
+# container usage
+sum(container_memory_usage_bytes{pod_name=~"compute-.*", image!="", container!="POD"})
+
+# container requests
+avg(kube_pod_container_resource_requests_memory_bytes{pod=~"compute-.*"})
+
+# container limits
+avg(kube_pod_container_resource_limits_memory_bytes{pod=~"compute-.*"})
 ```
