@@ -20,7 +20,7 @@ spec:
       - command:
         - "sh"
         - "-c"
-        - "sleep 2d"
+        - "/usr/local/bin/stress --cpu 1 --vm 1 --vm-bytes 300M"
         image: containerstack/alpine-stress
         name: compute
         resources:

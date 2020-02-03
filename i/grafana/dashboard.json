@@ -213,7 +213,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(container_memory_usage_bytes{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"})",
+          "expr": "container_memory_working_set_bytes{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"}",
           "hide": false,
           "legendFormat": "container usage",
           "refId": "A"
@@ -251,7 +251,7 @@
       },
       "yaxes": [
         {
-          "format": "short",
+          "format": "bytes",
           "label": null,
           "logBase": 1,
           "max": null,
@@ -301,5 +301,5 @@
   "timezone": "",
   "title": "CPU Mem",
   "uid": "2cXq0H8Zz",
-  "version": 1
+  "version": 5
 }

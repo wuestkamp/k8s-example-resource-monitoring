@@ -53,7 +53,9 @@ Go to http://localhost:3000/dashboard/import and import the dashboard from `i/gr
 
 
 ### Use resources
-Exec into the running pod and make it use resources.
+Change the `i/k8s/deploy.yaml`.
+
+Or exec into the running pod and make it use resources.
 
 ```
 # cpu
@@ -70,7 +72,7 @@ kubectl exec -it compute-b57fb48cd-km6wn bash
 ## cpu
 ```
 # container usage
-sum(rate (container_cpu_usage_seconds_total{pod_name=~"compute-.*", image!="", container!="POD"}[5m]))
+rate (container_cpu_usage_seconds_total{pod_name=~"compute-.*", image!="", container!="POD"}[5m])
 
 # container requests
 avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
@@ -85,7 +87,7 @@ sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!
 ## memory
 ```
 # container usage
-sum(container_memory_usage_bytes{pod_name=~"compute-.*", image!="", container!="POD"})
+container_memory_working_set_bytes{pod_name=~"compute-.*", image!="", container!="POD"}
 
 # container requests
 avg(kube_pod_container_resource_requests_memory_bytes{pod=~"compute-.*"})
