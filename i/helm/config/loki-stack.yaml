@@ -1,0 +1,5 @@
+loki:
+  resources:
+    limits:
+        memory: 300Mi
+        cpu: 200m

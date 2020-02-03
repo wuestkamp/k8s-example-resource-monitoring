@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    run: compute
+  name: compute
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: compute
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        run: compute
+    spec:
+      containers:
+      - command:
+        - "sh"
+        - "-c"
+        - "sleep 2d"
+        image: containerstack/alpine-stress
+        name: compute
+        resources:
+          limits:
+            cpu: "1.2"
+            memory: "500Mi"
+          requests:
+            cpu: "0.5"
+            memory: "250Mi"

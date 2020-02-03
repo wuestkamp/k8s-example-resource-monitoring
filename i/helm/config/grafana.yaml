@@ -1,0 +1,24 @@
+persistence:
+  enabled: true
+persistence:
+  size: 1Gi
+persistence:
+  storageClassName: retain
+resources:
+  requests:
+      memory: 100Mi
+      cpu: 100m
+  limits:
+      memory: 300Mi
+      cpu: 200m
+plugins:
+  - grafana-image-renderer
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.prometheus
+      access: proxy
+      isDefault: true
