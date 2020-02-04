@@ -17,16 +17,12 @@ spec:
         run: compute
     spec:
       containers:
-      - command:
-        - "sh"
-        - "-c"
-        - "/usr/local/bin/stress --cpu 1 --vm 1 --vm-bytes 300M"
-        image: containerstack/alpine-stress
-        name: compute
+      - name: compute
+        image: gcr.io/kubernetes-e2e-test-images/resource-consumer:1.5
         resources:
           limits:
-            cpu: "1.2"
+            cpu: "700m"
             memory: "500Mi"
           requests:
-            cpu: "0.5"
+            cpu: "500m"
             memory: "250Mi"

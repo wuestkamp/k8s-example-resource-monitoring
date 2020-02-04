@@ -98,7 +98,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(rate (container_cpu_usage_seconds_total{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"}[5m]))",
+          "expr": "rate(container_cpu_usage_seconds_total{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"}[5m])",
           "hide": false,
           "legendFormat": "container usage",
           "refId": "A"
@@ -116,7 +116,7 @@
           "refId": "C"
         },
         {
-          "expr": "sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~\"compute-.*\", container!=\"POD\", image!=\"\"}[5m]))",
+          "expr": "rate(container_cpu_cfs_throttled_seconds_total{pod=~\"compute-.*\", container!=\"POD\", image!=\"\"}[5m])",
           "hide": false,
           "legendFormat": "throttling",
           "refId": "D"
@@ -281,7 +281,7 @@
     "list": []
   },
   "time": {
-    "from": "now-15m",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -301,5 +301,5 @@
   "timezone": "",
   "title": "CPU Mem",
   "uid": "2cXq0H8Zz",
-  "version": 5
+  "version": 6
 }

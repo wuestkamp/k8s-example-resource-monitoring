@@ -53,18 +53,28 @@ Go to http://localhost:3000/dashboard/import and import the dashboard from `i/gr
 
 
 ### Use resources
-Change the `i/k8s/deploy.yaml`.
-
-Or exec into the running pod and make it use resources.
-
 ```
-# cpu
-kubectl exec -it compute-7bc79fcc8-jd5c4 stress -- -cpus 1
+kubectl run curl --image=curlimages/curl --rm --restart=Never -it sh
 
-# memory
-kubectl exec -it compute-b57fb48cd-km6wn bash
-> /usr/local/bin/stress --cpu 1 --io 4 --vm 1 --vm-bytes 400M
+# use cluster internal compute pod IP
+curl --data "millicores=400&durationSec=3600" 10.12.0.11:8080/ConsumeCPU
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Prometheus queries
