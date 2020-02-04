@@ -50,31 +50,14 @@ Password: printed in the terminal output.
 Go to http://localhost:3000/dashboard/import and import the dashboard from `i/grafana/dashboard.json`
 
 
-
-
 ### Use resources
 ```
 kubectl run curl --image=curlimages/curl --rm --restart=Never -it sh
 
 # use cluster internal compute pod IP
 curl --data "millicores=400&durationSec=3600" 10.12.0.11:8080/ConsumeCPU
+curl --data "megabytes=400&durationSec=300" 10.12.2.13:8080/ConsumeMem
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # Prometheus queries
@@ -91,7 +74,7 @@ avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
 avg(kube_pod_container_resource_limits_cpu_cores{pod=~"compute-.*"})
 
 # throttling
-sum(rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!="POD", image!=""}[5m]))
+rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!="POD", image!=""}[5m])
 ```
 
 ## memory
