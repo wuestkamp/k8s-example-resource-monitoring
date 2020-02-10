@@ -1,6 +1,7 @@
 # Kubernetes Resource Monitoring by example
 
-Medium article: TODO
+Medium article: https://medium.com/@wuestkamp/k8s-monitor-pod-cpu-and-memory-usage-with-prometheus-28eec6d84729?source=friends_link&sk=b498011bceb730596ee93d56869a2f5c
+
 
 **NOTICE**
 If some of the Prometheus queries are not working for you it might be because of `pod_name` or `container_name` have been renamed to `pod` and `container` in other metrics-server version.
