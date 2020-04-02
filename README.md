@@ -4,7 +4,7 @@ Medium article: https://medium.com/@wuestkamp/k8s-monitor-pod-cpu-and-memory-usa
 
 
 ## NOTICE K8s > 1.16
-If you’re using Kubernetes >1.16 you’ll have to use **pod** instead of **pod_name** and **container** instead of **container_name**.
+If you’re using Kubernetes >=1.16 you’ll have to use **pod** instead of **pod_name** and **container** instead of **container_name**.
 
 https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.16.md#removed-metrics
 
