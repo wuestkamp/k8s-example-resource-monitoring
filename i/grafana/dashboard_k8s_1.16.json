@@ -98,7 +98,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(container_cpu_usage_seconds_total{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"}[5m])",
+          "expr": "rate(container_cpu_usage_seconds_total{pod=~\"compute-.*\", image!=\"\", container!=\"POD\"}[5m])",
           "hide": false,
           "legendFormat": "container usage",
           "refId": "A"
@@ -213,7 +213,7 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "container_memory_working_set_bytes{pod_name=~\"compute-.*\", image!=\"\", container!=\"POD\"}",
+          "expr": "container_memory_working_set_bytes{pod=~\"compute-.*\", image!=\"\", container!=\"POD\"}",
           "hide": false,
           "legendFormat": "container usage",
           "refId": "A"
@@ -301,5 +301,5 @@
   "timezone": "",
   "title": "CPU Mem",
   "uid": "2cXq0H8Zz",
-  "version": 6
+  "version": 2
 }

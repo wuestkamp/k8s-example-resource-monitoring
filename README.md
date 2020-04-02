@@ -91,3 +91,32 @@ avg(kube_pod_container_resource_requests_memory_bytes{pod=~"compute-.*"})
 # container limits
 avg(kube_pod_container_resource_limits_memory_bytes{pod=~"compute-.*"})
 ```
+
+# Prometheus queries K8s from 1.16
+
+## cpu
+```
+# container usage
+rate(container_cpu_usage_seconds_total{pod=~"compute-.*", image!="", container!="POD"}[5m])
+
+# container requests
+avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
+
+# container limits
+avg(kube_pod_container_resource_limits_cpu_cores{pod=~"compute-.*"})
+
+# throttling
+rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!="POD", image!=""}[5m])
+```
+
+## memory
+```
+# container usage
+container_memory_working_set_bytes{pod=~"compute-.*", image!="", container!="POD"}
+
+# container requests
+avg(kube_pod_container_resource_requests_memory_bytes{pod=~"compute-.*"})
+
+# container limits
+avg(kube_pod_container_resource_limits_memory_bytes{pod=~"compute-.*"})
+```
