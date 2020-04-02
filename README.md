@@ -3,16 +3,17 @@
 Medium article: https://medium.com/@wuestkamp/k8s-monitor-pod-cpu-and-memory-usage-with-prometheus-28eec6d84729?source=friends_link&sk=b498011bceb730596ee93d56869a2f5c
 
 
-**NOTICE**
-If some of the Prometheus queries are not working for you it might be because of `pod_name` or `container_name` have been renamed to `pod` and `container` in other metrics-server version.
+## NOTICE K8s > 1.16
+If you’re using Kubernetes >1.16 you’ll have to use **pod** instead of **pod_name** and **container** instead of **container_name**.
 
+https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.16.md#removed-metrics
 
 
 ## run yourself
 
 ### You need a cluster, like with Gcloud:
 ```
-gcloud container clusters create resources --num-nodes 3 --zone europe-west3-b --machine-type n1-standard-2
+gcloud container clusters create resources --num-nodes 3 --zone europe-west3-b --machine-type n1-standard-2 --node-version=1.15 --cluster-version=1.15
 ```
 
 ### Install helm repos:
