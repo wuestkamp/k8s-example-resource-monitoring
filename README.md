@@ -49,7 +49,9 @@ User: admin
 Password: printed in the terminal output.
 
 #### install Dashboard
-Go to http://localhost:3000/dashboard/import and import the dashboard from `i/grafana/dashboard.json`
+Go to http://localhost:3000/dashboard/import and import the dashboard from `i/grafana/dashboard_k8s_1.15.json` or `i/grafana/dashboard_k8s_1.16.json`.
+
+There are different dashboards because metric names have changes from k8s 1.16 on.
 
 
 ### Use resources
@@ -61,12 +63,12 @@ curl --data "megabytes=400&durationSec=300" compute:8080/ConsumeMem
 ```
 
 
-# Prometheus queries
+# Prometheus queries K8s till 1.15
 
 ## cpu
 ```
 # container usage
-rate (container_cpu_usage_seconds_total{pod_name=~"compute-.*", image!="", container!="POD"}[5m])
+rate(container_cpu_usage_seconds_total{pod=~"compute-.*", image!="", container_name!="POD"}[5m])
 
 # container requests
 avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
@@ -75,13 +77,13 @@ avg(kube_pod_container_resource_requests_cpu_cores{pod=~"compute-.*"})
 avg(kube_pod_container_resource_limits_cpu_cores{pod=~"compute-.*"})
 
 # throttling
-rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container!="POD", image!=""}[5m])
+rate(container_cpu_cfs_throttled_seconds_total{pod=~"compute-.*", container_name!="POD", image!=""}[5m])
 ```
 
 ## memory
 ```
 # container usage
-container_memory_working_set_bytes{pod_name=~"compute-.*", image!="", container!="POD"}
+container_memory_working_set_bytes{pod_name=~"compute-.*", image!="", container_name!="POD"}
 
 # container requests
 avg(kube_pod_container_resource_requests_memory_bytes{pod=~"compute-.*"})
