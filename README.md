@@ -54,9 +54,8 @@ Go to http://localhost:3000/dashboard/import and import the dashboard from `i/gr
 ```
 kubectl run curl --image=curlimages/curl --rm --restart=Never -it sh
 
-# use cluster internal compute pod IP
-curl --data "millicores=400&durationSec=3600" 10.12.0.11:8080/ConsumeCPU
-curl --data "megabytes=400&durationSec=300" 10.12.2.13:8080/ConsumeMem
+curl --data "millicores=400&durationSec=300" compute:8080/ConsumeCPU
+curl --data "megabytes=400&durationSec=300" compute:8080/ConsumeMem
 ```
 
 

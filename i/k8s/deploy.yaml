@@ -26,3 +26,18 @@ spec:
           requests:
             cpu: "500m"
             memory: "250Mi"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    run: compute
+  name: compute
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    run: compute
